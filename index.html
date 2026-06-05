@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevMaster | Full Stack Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00d4ff;
+            --secondary: #ff2a6d;
+            --bg: #0a0e27;
+            --card: #16213e;
+            --text: #e0e0e0;
+            --dark: #0f0f0f;
+        }
+
+        body {
+            font-family: 'Consolas', 'Monaco', 'Microsoft YaHei', monospace;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* 粒子背景 */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 10s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.5; }
+            50% { transform: translateY(-100vh) translateX(50px); opacity: 1; }
+        }
+
+        /* 导航栏 */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            position: relative;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero 区域 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--primary));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+            letter-spacing: 5px;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .typing {
+            font-size: clamp(18px, 3vw, 28px);
+            color: var(--primary);
+            margin-bottom: 40px;
+            min-height: 40px;
+        }
+
+        .typing::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .hero-desc {
+            max-width: 600px;
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.6);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--bg);
+            transform: translateY(-2px);
+        }
+
+        /* 滚动指示器 */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator::before {
+            content: '▼';
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* 特性区域 */
+        .features {
+            padding: 100px 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--card);
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* 状态栏 */
+        .status-bar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--card);
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            font-size: 12px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* 代码装饰 */
+        .code-decoration {
+            position: fixed;
+            font-family: 'Consolas', monospace;
+            font-size: 12px;
+            color: rgba(0, 212, 255, 0.1);
+            z-index: 0;
+            pointer-events: none;
+            white-space: pre;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .features {
+                padding: 50px 20px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 粒子背景 -->
+    <div id="particles"></div>
+
+    <!-- 代码装饰 -->
+    <div class="code-decoration" style="top: 20%; left: 5%;">const dev = new Developer();</div>
+    <div class="code-decoration" style="top: 60%; right: 5%;">while(alive) { code(); }</div>
+    <div class="code-decoration" style="bottom: 30%; left: 10%;">function createMagic() { ... }</div>
+
+    <!-- 导航栏 -->
+    <nav>
+        <a href="index.html" class="logo">&lt;DevMaster/&gt;</a>
+        <ul class="nav-links">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="projects.html">项目</a></li>
+            <li><a href="skills.html">技能</a></li>
+            <li><a href="contact.html">联系</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>HELLO WORLD</h1>
+        <div class="typing" id="typing"></div>
+        <p class="hero-desc">
+            我是一名全栈开发工程师，专注于构建高性能、可扩展的 Web 应用程序。
+            代码是我的画笔，互联网是我的画布。
+        </p>
+        <div class="btn-group">
+            <a href="projects.html" class="btn btn-primary">查看作品</a>
+            <a href="contact.html" class="btn btn-outline">联系我</a>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- 特性 -->
+    <section class="features">
+        <h2 class="section-title">核心优势</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>高性能</h3>
+                <p>优化代码结构，提升应用性能，确保用户获得流畅的体验。从加载速度到运行时效率，每个细节都不放过。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>安全可靠</h3>
+                <p>遵循最佳安全实践，保护用户数据。从输入验证到加密传输，构建坚不可摧的安全防线。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>响应式设计</h3>
+                <p>一套代码，多端适配。无论是在手机、平板还是桌面端，都能获得完美的视觉体验。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>现代技术栈</h3>
+                <p>紧跟技术潮流，使用最新的框架和工具。React、Vue、Node.js、Docker，应有尽有。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>极致体验</h3>
+                <p>注重用户体验和交互细节。流畅的动画、直观的界面，让每一次点击都成为享受。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <h3>持续维护</h3>
+                <p>代码即文档，完善的注释和测试。项目交付不是终点，而是长期合作的开始。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 状态栏 -->
+    <div class="status-bar">
+        <div class="status-dot"></div>
+        <span>System Online</span>
+    </div>
+
+    <script>
+        // 生成粒子
+        const particles = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.top = Math.random() * 100 + 'vh';
+            p.style.animationDelay = Math.random() * 10 + 's';
+            p.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particles.appendChild(p);
+        }
+
+        // 打字机效果
+        const texts = [
+            'Full Stack Developer',
+            'Code is Poetry',
+            'Building the Future',
+            'Think Different'
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingEl = document.getElementById('typing');
+
+        function type() {
+            const current = texts[textIndex];
+            if (isDeleting) {
+                typingEl.textContent = current.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingEl.textContent = current.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let speed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIndex === current.length) {
+                speed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                speed = 500;
+            }
+
+            setTimeout(type, speed);
+        }
+        type();
+    </script>
+</body>
+</html>
