@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目作品 | DevMaster</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .projects-hero {
+            padding: 150px 50px 80px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .projects-hero h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .projects-hero p {
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 16px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 50px 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-card {
+            background: var(--card);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--card), #1a1a3e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, var(--card) 100%);
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-content h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .project-content p {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            padding: 5px 12px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            font-size: 12px;
+            color: var(--primary);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s;
+        }
+
+        .project-links a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px 50px;
+            }
+
+            .projects-hero {
+                padding: 120px 20px 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles"></div>
+
+    <div class="code-decoration" style="top: 20%; left: 5%;">git commit -m "awesome"</div>
+    <div class="code-decoration" style="bottom: 20%; right: 5%;">npm run deploy</div>
+
+    <nav>
+        <a href="index.html" class="logo">&lt;DevMaster/&gt;</a>
+        <ul class="nav-links">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="projects.html">项目</a></li>
+            <li><a href="skills.html">技能</a></li>
+            <li><a href="contact.html">联系</a></li>
+        </ul>
+    </nav>
+
+    <section class="projects-hero">
+        <h1>项目作品</h1>
+        <p>精选项目展示，每一个都是技术与创意的完美结合。</p>
+    </section>
+
+    <div class="projects-grid">
+        <div class="project-card">
+            <div class="project-image">🚀</div>
+            <div class="project-content">
+                <h3>智能云平台</h3>
+                <p>基于微服务架构的企业级云平台，支持百万级并发，提供一站式云解决方案。</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Kubernetes</span>
+                </div>
+                <div class="project-links">
+                    <a href="#">🔗 查看演示</a>
+                    <a href="#">📁 源代码</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image">🤖</div>
+            <div class="project-content">
+                <h3>AI 智能助手</h3>
+                <p>基于深度学习的智能对话系统，支持自然语言处理和意图识别，准确率达95%。</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">Vue.js</span>
+                    <span class="tech-tag">FastAPI</span>
+                </div>
+                <div class="project-links">
+                    <a href="#">🔗 查看演示</a>
+                    <a href="#">📁 源代码</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image">📊</div>
+            <div class="project-content">
+                <h3>数据可视化平台</h3>
+                <p>实时大数据可视化分析平台，支持多维度数据展示和智能报表生成。</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">D3.js</span>
+                    <span class="tech-tag">ECharts</span>
+                    <span class="tech-tag">Go</span>
+                    <span class="tech-tag">Redis</span>
+                </div>
+                <div class="project-links">
+                    <a href="#">🔗 查看演示</a>
+                    <a href="#">📁 源代码</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image">🛒</div>
+            <div class="project-content">
+                <h3>电商管理系统</h3>
+                <p>全功能电商管理后台，包含商品管理、订单处理、支付集成和数据分析模块。</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Next.js</span>
+                    <span class="tech-tag">Prisma</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">Stripe</span>
+                </div>
+                <div class="project-links">
+                    <a href="#">🔗 查看演示</a>
+                    <a href="#">📁 源代码</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image">🎮</div>
+            <div class="project-content">
+                <h3>实时游戏引擎</h3>
+                <p>基于WebGL的轻量级游戏引擎，支持2D/3D渲染，帧率稳定在60FPS。</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">WebGL</span>
+                    <span class="tech-tag">Three.js</span>
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">WebSocket</span>
+                </div>
+                <div class="project-links">
+                    <a href="#">🔗 查看演示</a>
+                    <a href="#">📁 源代码</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image">🔐</div>
+            <div class="project-content">
+                <h3>区块链钱包</h3>
+                <p>去中心化数字钱包，支持多链资产管理，采用多重签名和硬件加密技术。</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Solidity</span>
+                    <span class="tech-tag">Web3.js</span>
+                    <span class="tech-tag">React Native</span>
+                    <span class="tech-tag">Ethereum</span>
+                </div>
+                <div class="project-links">
+                    <a href="#">🔗 查看演示</a>
+                    <a href="#">📁 源代码</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="status-bar">
+        <div class="status-dot"></div>
+        <span>System Online</span>
+    </div>
+
+    <script>
+        const particles = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.top = Math.random() * 100 + 'vh';
+            p.style.animationDelay = Math.random() * 10 + 's';
+            p.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particles.appendChild(p);
+        }
+    </script>
+</body>
+</html>
